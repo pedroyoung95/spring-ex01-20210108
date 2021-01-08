@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.zerock.domain.SampleDTO;
+import org.zerock.domain.SampleDTOList;
 
 import lombok.extern.log4j.Log4j;
 
@@ -47,5 +49,17 @@ public class SampleController {
 	public String ex02List(@RequestParam("ids") ArrayList<String> ids) {
 		log.info("ids: " + ids);
 		return "ex02List";
+	}
+	
+	@GetMapping("/ex01")
+	public String ex01(SampleDTO dto) {
+		log.info("" + dto);
+		return "ex01";
+	}
+	
+	@GetMapping("/ex02Bean")
+	public String ex02Bean(SampleDTOList list) {
+		log.info("list dtos: " + list);		
+		return "ex02Bean";
 	}
 }
