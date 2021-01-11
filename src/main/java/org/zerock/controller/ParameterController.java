@@ -108,7 +108,7 @@ public class ParameterController {
 		//requiredType은 propertyEditor를 사용
 //		binder.registerCustomEditor(requiredType, propertyEditor);
 		//파라미터 값을 Book클래스에 맞게 할당하기 위해 CustomBookEditor를 거치게 됨
-		binder.registerCustomEditor(Book.class, new  CustomBookEditor());
+		binder.registerCustomEditor(Book.class, new CustomBookEditor());
 	}
 	
 	@RequestMapping("/ex10")
