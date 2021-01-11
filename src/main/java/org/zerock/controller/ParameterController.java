@@ -5,8 +5,13 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.zerock.domain.Book;
+import org.zerock.domain.CustomBookEditor;
 import org.zerock.domain.Member;
 
 import lombok.extern.log4j.Log4j;
@@ -93,6 +98,23 @@ public class ParameterController {
 		//파라미터값을 받아서 객체에 set하는 코드가 필요X
 		log.info("method9");
 		log.info(member);
+	}
+	
+	@InitBinder
+	//@InitBinder어노테이션이 붙은 메소드가 다른 메소드보다 먼저 실행하게 됨
+	//파라미터에 대한 사전 작업이 필요한 경우 이 어노테이션이 붙은 메소드에서 작업하면 됨
+	public void initBinder1(WebDataBinder binder) {
+		log.info("initbinder1");
+		//requiredType은 propertyEditor를 사용
+//		binder.registerCustomEditor(requiredType, propertyEditor);
+		//파라미터 값을 Book클래스에 맞게 할당하기 위해 CustomBookEditor를 거치게 됨
+		binder.registerCustomEditor(Book.class, new  CustomBookEditor());
+	}
+	
+	@RequestMapping("/ex10")
+	public void method10(@RequestParam("book") Book book) {
+		log.info("method10");
+		log.info(book);
 	}
 	
 }
