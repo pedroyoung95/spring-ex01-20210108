@@ -25,7 +25,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class SampleController {
 	
-	@RequestMapping(value = "/basic", method= {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping( method= {RequestMethod.GET, RequestMethod.POST})
 	public void basic() {
 		log.info("basic................");
 	}
