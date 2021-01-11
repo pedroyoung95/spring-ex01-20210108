@@ -6,13 +6,16 @@ import java.util.Arrays;
 import java.util.Date;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.zerock.domain.SampleDTO;
 import org.zerock.domain.SampleDTOList;
 import org.zerock.domain.TodoDTO;
@@ -77,7 +80,26 @@ public class SampleController {
 	
 	@GetMapping("/ex03")
 	public String ex03(TodoDTO todo) {
+		//TodoDTO클래스의 필드에 @DateTimeFormat이 붙어있기 때문에 메소드에선 추가 작성X
 		log.info("todo: " + todo);
 		return "ex03";
+	}
+	
+	@GetMapping("/ex04")
+	public String ex04(SampleDTO dto, @ModelAttribute("page") int page) {
+		log.info("dto: " + dto);
+		log.info("page: " + page);
+		
+		return "/sample/ex04";
+	}
+	
+	@GetMapping("/ex06")
+	public @ResponseBody SampleDTO ex06() {
+		log.info("/ex06...............");
+		SampleDTO dto = new SampleDTO();
+		dto.setName("홍길동");
+		dto.setAge(10);
+		
+		return dto;
 	}
 }
